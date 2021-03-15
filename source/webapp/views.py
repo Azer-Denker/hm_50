@@ -37,8 +37,8 @@ class TaskCreateView(View):
                 summary=form.cleaned_data['summary'],
                 description=form.cleaned_data['description'],
                 status=form.cleaned_data['status'],
-                type_task=form.cleaned_data['type_task']
                 )
+            task.type_task.set(form.cleaned_data['type_task'])
             return redirect('view', pk=task.pk)
         else:
             return render(request, 'add_new.html', context={
@@ -95,6 +95,7 @@ class DeleteTemplateView(TemplateView):
         task = get_object_or_404(Task, pk=pk)
         task.delete()
         return redirect('index')
+
 
 def multi_delete(request):
     data = request.POST.getlist('id')

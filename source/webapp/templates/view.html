@@ -18,4 +18,5 @@
     <p class="description">Описание :{{ task.description }}</p>
 <p>Статус: {{ task.status }}</p>
 <p> Дата выполнения {{ task.created_at|date:"d.m.Y H:i:s" }} </p>
+    <p>Types: {% for type in task.type_task.all %}{{ type.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 {% endblock %}

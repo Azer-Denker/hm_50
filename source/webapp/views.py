@@ -57,7 +57,7 @@ class UpdateTemplateView(TemplateView):
             "summary": task.summary,
             "description": task.description,
             "status": task.status,
-            "type_task": task.type_task})
+            "type_task": task.type_task.all()})
         context['task'] = task
         context['form'] = form
         return context
@@ -70,7 +70,7 @@ class UpdateTemplateView(TemplateView):
             task.summary = form.cleaned_data['summary']
             task.description = form.cleaned_data['description']
             task.status = form.cleaned_data['status']
-            task.type_task = form.cleaned_data['type_task']
+            task.type_task.set(form.cleaned_data['type_task'])
             task.save()
             return redirect('view', pk=task.pk)
         else:
